@@ -1,9 +1,9 @@
 <template>
     <v-row class="item-box">
-        <v-col class="date" cols="4">
+        <v-col class="date" cols="3">
             {{ item.regDtm }}    
         </v-col>
-        <v-col class="asin" cols="4">
+        <v-col class="asin" cols="6">
             {{ item.reviewAsins }}
         </v-col>
         <v-col class="member" cols="1">
@@ -53,5 +53,14 @@ export default {
     margin-bottom: 1px;
     overflow: hidden;
     height: 50px;
+    border: 2px solid lightgray;
+    border-radius: 10px;
+}
+
+.detail{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
 }
 </style>

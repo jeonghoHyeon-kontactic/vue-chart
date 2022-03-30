@@ -1,7 +1,7 @@
 <template>
     <v-container>
         <v-row>
-            <v-card>
+            <v-card replace="true">
                 <v-tabs
                 v-model="tab"
                 background-color="pink"
@@ -20,9 +20,14 @@
                     v-for="item in items"
                     :key="item.tab"
                 >
-                    <v-card flat>
+                    <v-card flat >
                     <v-card-text>
-                        <bar-chart-test />
+                        <div v-if="item.tab == 'High'">
+                            <bar-chart-test :labels="highItem.highLabel" :data="highItem.highData" />
+                        </div>
+                        <div v-else>
+                            <bar-chart-test :labels="lowItem.lowLabel" :data="lowItem.lowData" />
+                        </div>
                         <area-chart />
                         <rader-chart />
                         <line-chart />
@@ -43,7 +48,7 @@ import LineChart from '../chart/LineChart.vue'
 import RaderChart from '../chart/RaderChart.vue'
 import PieChart from '../chart/PieChart.vue'
 export default {
-  components: { BarChartTest, AreaChart, RaderChart, LineChart, PieChart},
+    components: { BarChartTest, AreaChart, RaderChart, LineChart, PieChart},
     data () {
         return {
             tab: null,
@@ -51,6 +56,7 @@ export default {
                 { tab: 'High', content: '' },
                 { tab: 'Low', content: '' },
             ],
+            
         }
     },
     methods:{
@@ -62,7 +68,13 @@ export default {
         })
     },
     computed:{
-       
+        highItem(){
+            return this.$store.state.analysis.highItem
+        },
+        lowItem(){
+            return this.$store.state.analysis.lowItem
+        }
+
     }
 }
 </script>

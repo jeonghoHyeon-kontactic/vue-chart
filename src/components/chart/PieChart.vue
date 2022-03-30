@@ -24,8 +24,8 @@ export default {
         datasets: [
           {
             backgroundColor: [this.gradient, this.gradient2, "#00D8FF"],
-            data: [40, 20, 10]
-          }
+            data: [40, 20, 10,40, 20, 10,40, 20, 10]
+          },
         ]
       },
       { responsive: true, maintainAspectRatio: false }

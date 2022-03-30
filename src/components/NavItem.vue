@@ -16,10 +16,6 @@ export default {
         return{
             nav: [
                 {
-                    name: "Home",
-                    href: "/"
-                },
-                {
                     name: "Analysis",
                     href: "/analysis"
                 },

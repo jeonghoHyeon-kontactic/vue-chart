@@ -10,7 +10,11 @@
     <v-app-bar app>
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
 
-      <v-toolbar-title>Kontactic</v-toolbar-title>
+      <v-toolbar-title>
+        <router-link to="/" class="title">
+          Kontactic
+        </router-link>
+      </v-toolbar-title>
     </v-app-bar>
 
     <v-main>
@@ -28,3 +32,11 @@ export default {
   components: { NavItem },
 };
 </script>
+
+<style lang="scss" scoped>
+.title{
+  text-decoration: none;
+  color: gray;
+  font-weight: bold;
+}
+</style>

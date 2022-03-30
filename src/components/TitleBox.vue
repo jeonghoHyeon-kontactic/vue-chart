@@ -17,7 +17,7 @@ export default {
 <style lang="scss" scoped>
 .title-box{
     text-align: center;
-    font-size: 80px;
+    font-size: 40px;
     font-weight: bold;
     color: grey;
 }

@@ -17,16 +17,26 @@ export default {
         }
     },
     methods:{
-        nextPage(){
+        movePage(){
             this.$emit('pageNum', this.page)
+            // // this.$emit('searchText', this.searchText)
+            // this.$store.dispatch('analysis/searchAnalysisList',{
+            //     pageNum: 1,
+            //     startDate: "2022-03-10",
+            //     endDate: "2022-03-19",
+            //     searchText: ""
+            // })
         }
     },
     watch:{
         page: function () {
-            this.nextPage()
+            this.movePage()
         }
     },
     computed:{
+        searchText(){
+            return this.$store.state.analysis.searchText
+        },
     }
 }
 </script>
