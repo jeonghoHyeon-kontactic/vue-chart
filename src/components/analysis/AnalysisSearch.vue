@@ -76,6 +76,7 @@
                     </v-card-title>
 
                     <v-card-text class="card-content">
+                        <v-text-field label="분석 제목을 입력해주세요." v-model="title"></v-text-field>
                         <v-textarea
                         outlined
                         name="input-7-4"
@@ -116,11 +117,12 @@ export default {
     data: () => ({
         dialog: false,
         asins:"",
-        startDate: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
-        endDate: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
+        startDate: (new Date(Date.now() - (new Date()).getTimezoneOffset() * -1400000)).toISOString().substring(0, 10),
+        endDate: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substring(0, 10),
         menu1: false,
         menu2: false,
-        searchText:""
+        searchText:"",
+        title:""
     }),
     methods:{
         closeModal(){
@@ -137,12 +139,14 @@ export default {
         },
         requestAnalysis(){
             axios.post('/api/review-anals/insert',{
-                reviewAsins:this.asins
+                reviewAsins:this.asins,
+                reviewAnalsTitle:this.title
             })
             .then(res => {
                 alert("요청 성공")
                 console.log(res)
                 this.closeModal()
+                location.replace('/analysis')
             })
             .catch(err => {
                 alert("요청에 실패했습니다.")
@@ -153,7 +157,7 @@ export default {
     },
     computed:{
         // startDate(){
-        //     return this.$store.getters["analysis/startDate"]
+        //     return this.$store.state.analysis.startDate
         // },
         // endDate(){
         //     return this.$store.state.analysis.endDate
@@ -165,7 +169,6 @@ export default {
 <style lang="scss" scoped>
 .test{
     border: 2px solid lightgray;
-    border-radius: 10px;
     margin-bottom: 0px;
 }
 .card-content{

@@ -3,6 +3,8 @@ import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import AnalysisView from '../views/AnalysisView'
 import AnalysisDetail from '../components/analysis/AnalysisDetail'
+import MypageView from "../views/MypageView"
+import ProductView from "../views/ProductView"
 
 Vue.use(VueRouter)
 
@@ -22,6 +24,16 @@ const routes = [
     name: 'detail',
     component: AnalysisDetail
   },
+  {
+    path: '/mypage',
+    name: 'mypage',
+    component: MypageView
+  },
+  {
+    path: '/product',
+    name: 'product',
+    component: ProductView
+  }
 ]
 
 const router = new VueRouter({

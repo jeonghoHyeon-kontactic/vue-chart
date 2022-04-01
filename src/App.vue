@@ -39,4 +39,7 @@ export default {
   color: gray;
   font-weight: bold;
 }
+#inspire{
+  box-sizing: border-box;
+}
 </style>

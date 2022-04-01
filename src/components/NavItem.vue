@@ -20,10 +20,15 @@ export default {
                     href: "/analysis"
                 },
                 {
+                    name: "Product",
+                    href: "/product"
+                },
+                {
                     name: "Mypage",
                     href: "/mypage"
                 },
             ]
+            
         }
     }
 }
