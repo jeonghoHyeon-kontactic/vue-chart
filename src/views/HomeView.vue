@@ -3,6 +3,7 @@
     <v-row class="home-box">
       <v-col>
         Home
+        <v-btn @click="check">토근확인</v-btn>
       </v-col>
     </v-row>
   </v-container>
@@ -10,7 +11,16 @@
 
 <script>
 export default {
-
+  methods:{
+    check(){
+      console.log(this.token)
+    }
+  },
+  computed: {
+    token(){
+      return this.$store.state.login.token
+    }
+  }
 }
 </script>
 

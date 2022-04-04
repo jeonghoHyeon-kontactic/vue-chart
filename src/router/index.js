@@ -5,12 +5,13 @@ import AnalysisView from '../views/AnalysisView'
 import AnalysisDetail from '../components/analysis/AnalysisDetail'
 import MypageView from "../views/MypageView"
 import ProductView from "../views/ProductView"
+import LoginView from "../views/LoginView"
 
 Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/',
+    path: '/home',
     name: 'home',
     component: HomeView
   },
@@ -33,7 +34,13 @@ const routes = [
     path: '/product',
     name: 'product',
     component: ProductView
-  }
+  },
+  {
+    path: '/',
+    name: 'login',
+    component: LoginView
+  },
+
 ]
 
 const router = new VueRouter({
