@@ -5,13 +5,14 @@
     :single-expand="singleExpand"
     :expanded.sync="expanded"
     :search="search"
-    item-key="name"
+    item-class="review-item"
+    item-key="id"
     show-expand
     class="elevation-1"
   >
     <template v-slot:top>
       <v-toolbar flat>
-        <v-toolbar-title>리뷰 목록</v-toolbar-title>
+        <v-toolbar-title>{{ title }}</v-toolbar-title>
         <v-spacer></v-spacer>
         <v-text-field
             v-model="search"
@@ -30,7 +31,7 @@
     </template>
     <template v-slot:expanded-item="{ headers, item }">
       <td :colspan="headers.length">
-        More info about {{ item.name }}
+        {{ item.content }}
       </td>
     </template>
   </v-data-table>
@@ -38,6 +39,7 @@
 
 <script>
   export default {
+    props:['reviewList',"title"],
     data () {
       return {
         search:"",
@@ -45,34 +47,30 @@
         singleExpand: false,
         dessertHeaders: [
           {
-            text: 'Dessert (100g serving)',
+            text: '리뷰 내용',
             align: 'start',
             sortable: false,
-            value: 'name',
+            value: 'subject',
           },
           { text: '', value: 'data-table-expand' },
         ],
-        desserts: [
-          {
-            name: 'Frozen Yogurt1Frozen',
-          },
-          {
-            name: 'Frozen Yogurt2',
-          },
-          {
-            name: 'Frozen Yogurt3',
-          },
-          {
-            name: 'Frozen Yogurt4',
-          },
-          {
-            name: 'Frozen Yogurt5',
-          },
-          {
-            name: 'Frozen Yogurt6',
-          },
-        ],
+        desserts: this.reviewList,
       }
     },
   }
 </script>
+
+<style lang="scss" scoped>
+.review-item{
+  height: 30px;
+  overflow: hidden;
+}
+
+.text-start{
+  height: 30px !important;
+}
+
+.elevation-1{
+  
+}
+</style>

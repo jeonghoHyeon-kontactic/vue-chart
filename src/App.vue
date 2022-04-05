@@ -1,7 +1,7 @@
 <template>
   <v-app id="inspire">
     <v-navigation-drawer
-      v-if="token"
+      v-if="true"
       v-model="drawer"
       app
     >

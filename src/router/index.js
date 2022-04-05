@@ -1,11 +1,12 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import HomeView from '../views/HomeView.vue'
-import AnalysisView from '../views/AnalysisView'
-import AnalysisDetail from '../components/analysis/AnalysisDetail'
-import MypageView from "../views/MypageView"
-import ProductView from "../views/ProductView"
-import LoginView from "../views/LoginView"
+import HomeView from '@/views/HomeView.vue'
+import AnalysisView from '@/views/AnalysisView'
+import AnalysisDetail from '@/components/analysis/AnalysisDetail'
+import MypageView from "@/views/MypageView"
+import ProductView from "@/views/ProductView"
+import LoginView from "@/views/LoginView"
+import HeatMap from "@/views/HeatMap"
 
 Vue.use(VueRouter)
 
@@ -39,6 +40,11 @@ const routes = [
     path: '/',
     name: 'login',
     component: LoginView
+  },
+  {
+    path: '/heatmap',
+    name: 'heatmap',
+    component: HeatMap
   },
 
 ]

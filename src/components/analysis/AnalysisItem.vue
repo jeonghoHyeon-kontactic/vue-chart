@@ -46,9 +46,11 @@ export default {
     },
     methods:{
         analysisDetail(){
+            this.$store.commit('analysis/updateId',this.item.reviewAnalsId)
             this.$router.push(`/analysis/${this.item.reviewAnalsId}`)
+            
         }
-    }
+    },
 }
 </script>
 

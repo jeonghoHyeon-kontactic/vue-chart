@@ -1,6 +1,6 @@
 <template>
     <div class="info-box">
-        <div class="review-count-box">
+        <div class="review-count-box box">
             <div class="icon-box">
                 <span class="material-icons icon">
                     rate_review
@@ -16,7 +16,7 @@
                 </div>
             </div>
         </div>
-        <div class="star-count-box">
+        <div class="star-count-box box">
             <div class="icon-box">
                 <span class="material-icons icon">
                     star
@@ -32,7 +32,7 @@
                 </div>
             </div>
         </div>
-        <div class="product-count-box">
+        <div class="product-count-box box">
             <div class="product-box">
                 <span class="material-icons icon">
                     category
@@ -48,8 +48,8 @@
                 </div>
             </div>
         </div>
-        <div class="download-box">
-            <v-btn>다운로드</v-btn>
+        <div class="download-box box">
+    
         </div>
     </div>
 </template>
@@ -65,6 +65,7 @@ export default {
     display: flex;
     .review-count-box{
         display: flex;
+        width: 25%;
         .icon-box{
 
         }
@@ -73,14 +74,28 @@ export default {
     }
     .star-count-box{
         display: flex;
+        margin-left: 10px;
+        width: 25%;
     }
     .product-count-box{
         display: flex;
+        margin-left: 10px;
+        width: 25%;
     }
     .download-box{
         display: flex;
+        margin-left: 10px;
+        width: 25%;
     }
 }
+
+.box{
+    background: white;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    padding: 10px;
+}
+
 
 .icon{
     color: gray;

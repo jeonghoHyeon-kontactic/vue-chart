@@ -128,6 +128,7 @@ export default {
         closeModal(){
             this.dialog = false
             this.asins = ""
+            this.title = ""
         },
         searchAnalysis(){
             this.$store.dispatch("analysis/searchAnalysisList",{
@@ -155,14 +156,6 @@ export default {
             })
         },
     },
-    computed:{
-        // startDate(){
-        //     return this.$store.state.analysis.startDate
-        // },
-        // endDate(){
-        //     return this.$store.state.analysis.endDate
-        // }
-    }
 }
 </script>
 

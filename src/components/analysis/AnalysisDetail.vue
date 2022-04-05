@@ -1,38 +1,31 @@
 <template>
     <div class="detail-container">
         <div class="input-box"> 
-            <v-textarea
-            outlined
-            name="input-7-4"
-            label="Outlined textarea"
-            v-model="highIgnoreKwrd"
-            ></v-textarea>
-            <v-textarea
-            outlined
-            name="input-7-4"
-            label="Outlined textarea"
-            v-model="lowIgnoreKwrd"
-            ></v-textarea>
-            <v-btn class="update-btn" @click="updateAnalysis">텍스트 필터</v-btn>
+            <tag-input />
         </div>
         <div class="info-box">
             <analysis-info :rCount="analysis" :sCount="analysis" :pCount="analysis"/>
-            <v-btn @click="saveImage">이미지 다운로드</v-btn>
         </div>
         <div class="chart-box">
-            <div class="keyword-chart">
-                <bar-chart-test  :chart-id="high-chart" :labels="highItem.highLabel" :data="highItem.highData" label="High Score Keyword"/>
+            <div class="high-chart-box">
+                <bar-chart-test chart-id="high-chart" :labels="highItem.highLabel" :data="highItem.highData" color="skyblue" label="High Score Keyword"/>
             </div>
-            <div class="k-chart" >
-                <bar-chart-test  :chart-id="low-chart" :labels="lowItem.lowLabel" :data="lowItem.lowData" label="Low Score Keyword"/>
+            <div class="low-chart-box" v-if="true">
+                <bar-chart-test chart-id="low-chart" :labels="lowItem.lowLabel" :data="lowItem.lowData" color="pink" label="Low Score Keyword"/>
+                <div class="download-btn-box">
+                    <v-btn @click="saveImage">이미지 다운로드</v-btn>
+                </div>
             </div>
         </div>
-        <div v-if="true" class="review-box"> 
+        <div class="mixture-box">
+            <mixture-kwrd />
+        </div>
+        <div class="review-box"> 
             <div class="high-review" v-if="true">
-                <data-table-test />
+                <data-table-test :reviewList="highReviewList" title="5점 리뷰 목록"/>
             </div>
             <div class="low-review" v-if="true">
-                <data-table />
+                <data-table-test :reviewList="lowReviewList" title="1점 리뷰 목록" />
             </div> 
         </div>
     </div>
@@ -40,17 +33,20 @@
 
 <script>
 import BarChartTest from '../chart/BarChartTest.vue'
-import DataTable from '../DataTable.vue'
+import TagInput from '../common/TagInput.vue'
 import DataTableTest from '../DataTableTest.vue'
 import AnalysisInfo from './AnalysisInfo.vue'
+import MixtureKwrd from './MixtureKwrd.vue'
 
 
 export default {
-    components: { BarChartTest, AnalysisInfo, DataTableTest, DataTable, },
+    components: { BarChartTest, AnalysisInfo, DataTableTest, TagInput, MixtureKwrd, }, 
     data () {
         return {
-            highIgnoreKwrd:"",
-            lowIgnoreKwrd:"",
+            chartData:{ labels: [], datasets: [] },
+            options: {
+                maintainAspectRatio: false
+            },
         }
     },
     methods:{
@@ -58,61 +54,34 @@ export default {
             this.$store.dispatch("analysis/updateAnalysis",{
                 highIgnoreKwrd:this.highIgnoreKwrd,
                 lowIgnoreKwrd:this.lowIgnoreKwrd,
-                reviewAnalsId:this.id
+                reviewAnalsId:this.$route.params.id
             })
             .then(() =>{
                 alert("업데이트 성공!")
                 // BarChartTest.update()
-                location.replace(`/analysis/${this.id}`)
+                location.replace(`/analysis/${this.$route.params.id}`)
                 
             })
         },
         saveImage(){
-
-            // let list = ['high','low']
             
-            let canvas1 = document.getElementById("high-chart").toDataURL('image/png')
+            let canvas1 = document.getElementById('high-chart').toDataURL('image/png')
+            let link1 = document.createElement('a')
+            link1.download = 'high-chart'
+            link1.href = canvas1
+            link1.click()
 
-            // let canvas2 = document.getElementById(`low-chart`).toDataURL('image/png')
-
-            let link = document.createElement('a')
-            link.download = 'image'
-            link.href = canvas1
-            link.click()
-            
-            // link.href = canvas2
-            // link.click()
-
-                
-         
-
-            // let canvas = document.getElementById(`${high}-chart`).toDataURL('image/png')
-            
-            // let canvas = []
-            // canvas = document.getElementsByClassName('chart').toDataURL('image/png');
-
-            // // canvas.forEach(element => console.log(element));
-            //     let link = document.createElement('a')
-            //     link.download = 'image'
-            //     link.href = canvas
-            //     link.click()
+            let canvas2 = document.getElementById('low-chart').toDataURL('image/png')
+            let link2 = document.createElement('a')
+            link2.download = 'low-chart'
+            link2.href = canvas2
+            link2.click()
 
         },
-        printChart() {
-            var canvasEle = document.getElementById('bar-chart');
-            var win = window.open('', 'Print', 'height=600,width=800');
-            win.document.write("<br><img src='" + canvasEle.toDataURL() + "' />");
-            setTimeout(function(){ //giving it 200 milliseconds time to load
-                    win.document.close();
-                    win.focus()
-                    win.print();
-                    win.location.reload()
-            }, 200);  
-        },
+        
     },
     created(){
-        this.highIgnoreKwrd = this.highIgnoreKwd
-        this.lowIgnoreKwrd = this.lowIgnoreKwd
+        alert(this.id)
         this.$store.dispatch("analysis/searchAnalysisWithId",{
             reviewAnalsId: this.id
         })
@@ -128,11 +97,11 @@ export default {
         analysis(){
             return this.$store.state.analysis.analysis
         },
-        highIgnoreKwd(){
-            return this.$store.state.analysis.highIgnoreKwd
+        highReviewList(){
+            return this.$store.state.analysis.highReviewList
         },
-        lowIgnoreKwd(){
-            return this.$store.state.analysis.lowIgnoreKwd
+        lowReviewList(){
+            return this.$store.state.analysis.lowReviewList
         },
         id(){
             return this.$store.state.analysis.id
@@ -146,14 +115,11 @@ export default {
     padding: 10px;
     background: lightgray;
     height: 100%;
-    .info-box{
-        background: white;
-        
-        padding: 10px;
-    }
     .input-box{
         display: flex;
         background: white;
+        border-radius: 5px;
+        margin-bottom: 10px;
         padding: 10px;
         
 
@@ -161,23 +127,66 @@ export default {
             
         }
     }
+    .info-box{
+        
+    }
+    
+    .mixture-box{
+        background: white;
+        border-radius: 5px;
+        margin-bottom: 10px;
+        padding: 10px;
+    }
+
     .chart-box{
         display: flex;
-        background: white;
-        padding: 10px;
-        .keyword-chart{
+        box-sizing: border-box;
+        
+        .high-chart-box{
             width: 50%;
+            background: white;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            padding: 10px;
         }
 
-        .k-chart{
+        .low-chart-box{
             width: 50%;
+            margin-left: 10px;
+            background: white;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            padding: 10px;
         }
     }
+
     .review-box{
-        
+        display: flex;
+        background: white;
+        border-radius: 5px;
+        margin-bottom: 10px;
+        padding: 10px;
+
+        .high-review{
+            width: 50%;
+            
+        }
+
+        .low-review{
+            width: 50%;
+            margin-left: 10px;
+            
+        }
 
     }
 }
+
+
+.download-btn-box{
+    display: flex;
+    justify-content: right;
+}
+
 .download-box{
     display: flex;
     justify-content: right;
