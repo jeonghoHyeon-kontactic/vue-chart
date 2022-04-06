@@ -43,26 +43,10 @@ export default {
     components: { BarChartTest, AnalysisInfo, DataTableTest, TagInput, MixtureKwrd, }, 
     data () {
         return {
-            chartData:{ labels: [], datasets: [] },
-            options: {
-                maintainAspectRatio: false
-            },
+            
         }
     },
     methods:{
-        updateAnalysis(){
-            this.$store.dispatch("analysis/updateAnalysis",{
-                highIgnoreKwrd:this.highIgnoreKwrd,
-                lowIgnoreKwrd:this.lowIgnoreKwrd,
-                reviewAnalsId:this.$route.params.id
-            })
-            .then(() =>{
-                alert("업데이트 성공!")
-                // BarChartTest.update()
-                location.replace(`/analysis/${this.$route.params.id}`)
-                
-            })
-        },
         saveImage(){
             
             let canvas1 = document.getElementById('high-chart').toDataURL('image/png')
@@ -78,14 +62,6 @@ export default {
             link2.click()
 
         },
-        
-    },
-    created(){
-        alert(this.id)
-        this.$store.dispatch("analysis/searchAnalysisWithId",{
-            reviewAnalsId: this.id
-        })
-        console.log(this.id)
     },
     computed:{
         highItem(){

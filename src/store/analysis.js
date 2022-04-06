@@ -41,6 +41,18 @@ export default {
         },
         updateId(state, payload){
             state.id = payload
+        },
+        resetState(state){
+            
+            state.highWordMixtureList = []
+            state.lowWordMixtureList = []
+            state.highReviewList = []
+            state.lowReviewList = []
+            state.analysis = {}
+            state.highItem = {}
+            state.lowItem = {}
+            state.highIgnoreKwd = []
+            state.lowIgnoreKwd = []
         }
 
     },
@@ -92,7 +104,7 @@ export default {
         },
 
         async searchAnalysisWithId({commit}, payload) {
-
+            
             try{
 
                 console.log(payload)
@@ -115,6 +127,8 @@ export default {
                 const lowWordMixtureList = res.data.content.lowWordMixtureList
                 console.log(res)
                 console.log(analysis)
+
+
                 commit('updateState',{
                     highWordMixtureList,
                     lowWordMixtureList,
@@ -132,6 +146,8 @@ export default {
                     highIgnoreKwd,
                     lowIgnoreKwd
                 })
+
+                
 
             }catch (error){
                 console.log(error)

@@ -2,7 +2,7 @@
     <div class="tag-container">
         <div class="high-ignore-box">
             <div class="tag-list high-ignore">
-                <div class="tag-item" :class="{ 'select': select }" v-for="item in highTagList" :key="item" @click="choice">
+                <div class="tag-item" v-for="item in highTagList" :key="item" @click="choice(item, $event, 5)">
                     {{ item }}
                 </div>
             </div>
@@ -12,7 +12,7 @@
         </div>
         <div class="low-ignore-box">
             <div class="tag-list low-ignore">
-                <div class="tag-item" :class="{ 'select': select }" v-for="item in lowTagList" :key="item" @click="choice">
+                <div class="tag-item" v-for="item in lowTagList" :key="item" @click.self="choice(item, $event, 1)">
                     {{ item }}
                 </div>
             </div>
@@ -35,6 +35,8 @@ export default {
             lowTagList:[],
             highTag: "",
             lowTag:"",
+            highRemoveList:[],
+            lowRemoveList:[],
             select: false
         }
     },
@@ -43,6 +45,73 @@ export default {
         this.lowTagList = this.lowIgnoreKwd
     },
     methods:{
+        choice(item,event,score){
+            
+            console.log(item)
+            console.log(event)
+            console.log(event.target.innerText)
+            const target = event.target.innerText
+            const test = event.target.attributes[1].value
+
+            if(score == 5){
+                if(test == "tag-item"){
+                    event.target.attributes[1].value = "tag-item red"
+                    this.highRemoveList.push(target)
+                }else {
+                    event.target.attributes[1].value = "tag-item"
+                    this.cancle(item,score)
+                }
+            }else if(score == 1){
+                if(test == "tag-item"){
+                    event.target.attributes[1].value = "tag-item red"
+                    this.lowRemoveList.push(target)
+                }else {
+                    event.target.attributes[1].value = "tag-item"
+                    this.cancle(item,score)
+                }
+            }
+
+        },
+        cancle(ignore,score){
+
+            if (score == 5){
+                for (let i=0; i < this.highRemoveList.length; i++){
+                    if(this.highRemoveList[i] === ignore){
+                        this.highRemoveList.splice(i,1)
+                        i-- 
+                    }
+                }
+            } else if (score == 1) {
+                for (let i=0; i < this.lowRemoveList.length; i++){
+                    if(this.lowRemoveList[i] === ignore){
+                        this.lowRemoveList.splice(i,1)
+                        i-- 
+                    }
+                }
+            }
+            
+        },
+        remove(){
+            this.highRemoveList.forEach(item => {
+                for (let i=0; i < this.highTagList.length; i++){
+                    if(this.highTagList[i] === item){
+                        this.highTagList.splice(i,1)
+                        i-- 
+                    }
+                }
+                
+            })
+
+            this.lowRemoveList.forEach(item => {
+                for (let i=0; i < this.lowTagList.length; i++){
+                    if(this.lowTagList[i] === item){
+                        this.lowTagList.splice(i,1)
+                        i-- 
+                    }
+                }
+                
+            })
+        },
         highAddTag(){
             if (this.highTag == ""){
                 alert("태그를 입력해주세요.")
@@ -65,25 +134,14 @@ export default {
                 this.lowTag = ""
             }
         },
-        remove(){
-            this.tagList = []
-        },
-        choice(){
-            this.select = true
-            alert(this.select)
-        },
-        updateAnalysis(){
-            this.$store.dispatch("analysis/updateAnalysis",{
+        async updateAnalysis(){
+            await this.$store.dispatch("analysis/updateAnalysis",{
                 highIgnoreKwrd:this.highTagList,
                 lowIgnoreKwrd:this.lowTagList,
-                reviewAnalsId:this.id
+                reviewAnalsId:this.$route.params.id
             })
-            .then(() =>{
-                alert("업데이트 성공!")
-                // BarChartTest.update()
-                location.replace(`/analysis/${this.id}`)
-                
-            })
+            alert("업데이트 성공!")
+            this.$router.go()
         },
     },
     computed:{
@@ -152,7 +210,7 @@ export default {
     background: pink;
 }
 
-.select{
+.red{
     background:red;
 }
 </style>

@@ -8,11 +8,10 @@
             </div>
             <div class="review-box">
                 <div class="review-head">
-                    리뷰 수
+                    전체 리뷰
                 </div>
                 <div class="review-content">
-                    
-                    13
+                    1406개
                 </div>
             </div>
         </div>
@@ -24,11 +23,25 @@
             </div>
             <div class="star-box">
                 <div class="star-head">
-                    별점 수
+                    5점 리뷰
                 </div>
                 <div class="star-content">
-                    
-                    52
+                    334개
+                </div>
+            </div>
+        </div>
+        <div class="star-count-box box">
+            <div class="icon-box">
+                <span class="material-icons icon">
+                    star
+                </span>
+            </div>
+            <div class="star-box">
+                <div class="star-head">
+                    1점 리뷰
+                </div>
+                <div class="star-content">
+                    641개
                 </div>
             </div>
         </div>
@@ -48,9 +61,6 @@
                 </div>
             </div>
         </div>
-        <div class="download-box box">
-    
-        </div>
     </div>
 </template>
 
@@ -63,6 +73,11 @@ export default {
 <style lang="scss" scoped>
 .info-box{
     display: flex;
+    .product-count-box{
+        display: flex;
+        margin-left: 10px;
+        width: 25%;
+    }
     .review-count-box{
         display: flex;
         width: 25%;
@@ -73,16 +88,6 @@ export default {
         
     }
     .star-count-box{
-        display: flex;
-        margin-left: 10px;
-        width: 25%;
-    }
-    .product-count-box{
-        display: flex;
-        margin-left: 10px;
-        width: 25%;
-    }
-    .download-box{
         display: flex;
         margin-left: 10px;
         width: 25%;

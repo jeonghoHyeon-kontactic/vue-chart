@@ -45,10 +45,16 @@ export default {
         }
     },
     methods:{
-        analysisDetail(){
-            this.$store.commit('analysis/updateId',this.item.reviewAnalsId)
-            this.$router.push(`/analysis/${this.item.reviewAnalsId}`)
-            
+        async analysisDetail(){
+            try{
+                await this.$store.dispatch("analysis/searchAnalysisWithId",{
+                    reviewAnalsId: this.item.reviewAnalsId
+                })
+                
+                this.$router.push(`/analysis/${this.item.reviewAnalsId}`)
+            }catch (error) {
+                console.log(error)                
+            }
         }
     },
 }
