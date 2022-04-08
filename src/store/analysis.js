@@ -20,6 +20,7 @@ export default {
         lowReviewList:[{}],
         highWordMixtureList:[],
         lowWordMixtureList:[],
+        reviewAsinsList:[]
 
     }),
 
@@ -125,11 +126,13 @@ export default {
                 const lowReviewList = res.data.content.lowReviewList
                 const highWordMixtureList = res.data.content.highWordMixtureList
                 const lowWordMixtureList = res.data.content.lowWordMixtureList
+                const reviewAsinsList = res.data.content.reviewAsinsList
                 console.log(res)
                 console.log(analysis)
 
 
                 commit('updateState',{
+                    reviewAsinsList,
                     highWordMixtureList,
                     lowWordMixtureList,
                     highReviewList,
@@ -189,8 +192,10 @@ export default {
                     const lowReviewList = res.data.content.lowReviewList
                     const highWordMixtureList = res.data.content.highWordMixtureList
                     const lowWordMixtureList = res.data.content.lowWordMixtureList
+                    const reviewAsinsList = res.data.content.reviewAsinsList
                     
                     commit('updateState',{
+                        reviewAsinsList,
                         highWordMixtureList,
                         lowWordMixtureList,
                         highReviewList,

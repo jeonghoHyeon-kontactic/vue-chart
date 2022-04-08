@@ -73,7 +73,7 @@ export default {
 
         },
         cancle(ignore,score){
-
+            
             if (score == 5){
                 for (let i=0; i < this.highRemoveList.length; i++){
                     if(this.highRemoveList[i] === ignore){
@@ -92,6 +92,7 @@ export default {
             
         },
         remove(){
+            // 5점 리뷰 불용어 삭제
             this.highRemoveList.forEach(item => {
                 for (let i=0; i < this.highTagList.length; i++){
                     if(this.highTagList[i] === item){
@@ -101,7 +102,7 @@ export default {
                 }
                 
             })
-
+            // 1점 리뷰 불용어 삭제
             this.lowRemoveList.forEach(item => {
                 for (let i=0; i < this.lowTagList.length; i++){
                     if(this.lowTagList[i] === item){

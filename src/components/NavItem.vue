@@ -16,12 +16,12 @@ export default {
         return{
             nav: [
                 {
-                    name: "Analysis",
-                    href: "/analysis"
+                    name: "Client",
+                    href: "/client"
                 },
                 {
-                    name: "Product",
-                    href: "/product"
+                    name: "Review",
+                    href: "/analysis"
                 },
                 {
                     name: "Mypage",
@@ -31,9 +31,7 @@ export default {
                     name: "HeatMap",
                     href: "/heatmap"
                 },
-
             ]
-            
         }
     }
 }

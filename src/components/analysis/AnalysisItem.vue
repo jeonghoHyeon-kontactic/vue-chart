@@ -1,39 +1,39 @@
 <template>
-    <v-row class="item-box">
-        <v-col class="date" cols="3">
+    <div class="item-box">
+        <div class="date">
             {{ item.regDtm }}    
-        </v-col>
-        <v-col cols="1">
+        </div>
+        <div class="title-1">
             {{ item.reviewAnalsTitle}}
-        </v-col>
-        <v-col class="asin" cols="5">
-            {{ item.reviewAsins }}
-        </v-col> 
-        <v-col class="member" cols="1">
+        </div>
+        <div class="asin">
+            {{ asins }}
+        </div> 
+        <div class="member">
             {{ item.regId }}
-        </v-col>
-        <v-col class="status" cols="1">
-            <div v-if="item.analsStatus == 1">
+        </div>
+        <div class="status">
+            <div v-if="item.analsStatus == 1" class="stay">
                 대기
             </div>
-            <div v-if="item.analsStatus == 2">
+            <div v-if="item.analsStatus == 2" class="progress">
                 진행
             </div>
-            <div v-if="item.analsStatus == 3">
+            <div v-if="item.analsStatus == 3" class="complete">
                 완료
             </div>
-            <div v-if="item.analsStatus == 4">
+            <div v-if="item.analsStatus == 4" class="fail">
                 실패
             </div>
-        </v-col>
-        <v-col class="detail" cols="1">
+        </div>
+        <div class="detail">
             <v-btn
                 elevation="2"
                 :disabled="item.analsStatus != 3"
                 @click="analysisDetail"
             >상세 보기</v-btn>
-        </v-col>
-    </v-row>
+        </div>
+    </div>
 </template>
 
 <script>
@@ -57,15 +57,90 @@ export default {
             }
         }
     },
+    computed:{
+        asins(){
+            return this.item.reviewAsins.substr(0,43) + " ..."
+        }
+    }
 }
 </script>
 
 <style lang="scss" scoped>
 .item-box{
-    margin-bottom: 1px;
+    margin-bottom: 5px;
+    display: flex;
     overflow: hidden;
-    height: 45px;
     border: 2px solid lightgray;
+    .date{
+        width: 15%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-right: 2px solid lightgray;
+    }
+    .title-1{
+        width: 15%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-right: 2px solid lightgray;
+    }
+    .asin{
+        width: 30%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-right: 2px solid lightgray;
+    }
+    .member{
+        width: 15%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-right: 2px solid lightgray;
+    }
+    .status{
+        width: 10%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-right: 2px solid lightgray;
+        font-weight: bold;
+        .stay{
+            background: skyblue;
+            border-radius: 5px;
+            color: white;
+            padding: 3px 5px 3px 5px;
+        }
+
+        .progress{
+            background: lightyellow;
+            border-radius: 5px;
+            color: white;
+            padding: 3px 5px 3px 5px;
+        }
+
+        .complete{
+            background: lightgreen;
+            border-radius: 5px;
+            color: white;
+            padding: 3px 5px 3px 5px;
+        }
+
+        .fail{
+            background: lightcoral;
+            border-radius: 5px;
+            color: white;
+            padding: 3px 5px 3px 5px;
+        }
+    }
+    .detail{
+        width: 15%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 5px;
+    }
 }
 
 .detail{

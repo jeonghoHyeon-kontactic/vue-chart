@@ -50,22 +50,17 @@
             }
         },
         methods:{
-            login(){
-                this.$store.dispatch("login/loginMember",{
+            async login(){
+                await this.$store.dispatch("login/loginMember",{
                     userEmail: this.userEmail,
                     userPwd: this.userPwd
                 })
-                .then(()=> {
-                    if(this.token == ""){
-                        alert("아이디 또는 비밀번호가 일치하지 않습니다.")
-                    }else{
-                        alert("로그인 성공")
-                        this.$router.push("/home")
-                    }
-                })
-                .catch((err) => {
-                    console.log(err)
-                })
+                if(this.token == ""){
+                    alert("아이디 또는 비밀번호가 일치하지 않습니다.")
+                }else{
+                    alert("로그인 성공")
+                    this.$router.push("/home")
+                }
             }
         },
         computed:{

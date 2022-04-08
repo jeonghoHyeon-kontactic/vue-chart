@@ -1,7 +1,7 @@
 <template>
   <v-app id="inspire">
     <v-navigation-drawer
-      v-if="true"
+      v-if="token"
       v-model="drawer"
       app
     >
@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import NavItem from './components/NavItem';
+import NavItem from '@/components/NavItem';
 
 export default {
   name: 'App',

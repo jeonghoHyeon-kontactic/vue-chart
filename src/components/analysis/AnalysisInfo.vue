@@ -11,53 +11,52 @@
                     전체 리뷰
                 </div>
                 <div class="review-content">
-                    1406개
+                    {{ reviewCount }}개
                 </div>
             </div>
         </div>
-        <div class="star-count-box box">
+        <div class="high-count-box box">
             <div class="icon-box">
                 <span class="material-icons icon">
-                    star
+                    insert_emoticon
                 </span>
             </div>
-            <div class="star-box">
-                <div class="star-head">
+            <div class="high-box">
+                <div class="high-head">
                     5점 리뷰
                 </div>
-                <div class="star-content">
-                    334개
+                <div class="high-content">
+                    {{ highReview }}개
                 </div>
             </div>
         </div>
-        <div class="star-count-box box">
+        <div class="low-count-box box">
             <div class="icon-box">
                 <span class="material-icons icon">
-                    star
+                    sentiment_very_dissatisfied
                 </span>
             </div>
-            <div class="star-box">
-                <div class="star-head">
+            <div class="low-box">
+                <div class="low-head">
                     1점 리뷰
                 </div>
-                <div class="star-content">
-                    641개
+                <div class="low-content">
+                    {{ lowReview }}개
                 </div>
             </div>
         </div>
         <div class="product-count-box box">
-            <div class="product-box">
+            <div class="icon-box">
                 <span class="material-icons icon">
                     category
                 </span>
             </div>
             <div class="product-box">
                 <div class="product-head">
-                    제품 수
+                    상품 수
                 </div>
                 <div class="product-content">
-                    
-                    3
+                    {{ productCount }}개
                 </div>
             </div>
         </div>
@@ -66,7 +65,20 @@
 
 <script>
 export default {
-    props:["rCount","sCount","pCount"]
+    computed:{
+        highReview(){
+            return this.$store.state.analysis.highReviewList.length
+        },
+        lowReview(){
+            return this.$store.state.analysis.lowReviewList.length
+        },
+        reviewCount(){
+            return this.highReview + this.lowReview
+        },
+        productCount(){
+            return this.$store.state.analysis.reviewAsinsList.length
+        }
+    }
 }
 </script>
 
@@ -77,20 +89,73 @@ export default {
         display: flex;
         margin-left: 10px;
         width: 25%;
+        .product-box{
+            text-align: center;
+            width: 100%;
+            .product-head{
+                height: 50%;
+                font-size:1.3em;
+                font-weight: bold;
+            }
+            .product-content{
+                height: 50%;
+                font-size:1.2em;
+            }
+        }
     }
     .review-count-box{
         display: flex;
         width: 25%;
-        .icon-box{
-
+        .review-box{
+            text-align: center;
+            width: 100%;
+            .review-head{
+                height: 50%;
+                font-size:1.3em;
+                font-weight: bold;
+            }
+            .review-content{
+                height: 50%;
+                font-size:1.2em;
+            }
         }
-
-        
     }
-    .star-count-box{
+    .high-count-box{
         display: flex;
         margin-left: 10px;
         width: 25%;
+        .high-box{
+            text-align: center;
+            width: 100%;
+            .high-head{
+                height: 50%;
+                font-size:1.3em;
+                font-weight: bold;
+            }
+            .high-content{
+                height: 50%;
+                font-size:1.2em;
+            }
+        }
+
+    }
+    .low-count-box{
+        display: flex;
+        margin-left: 10px;
+        width: 25%;
+        .low-box{
+            text-align: center;
+            width: 100%;
+            .low-head{
+                height: 50%;
+                font-size:1.3em;
+                font-weight: bold;
+            }
+            .low-content{
+                height: 50%;
+                font-size:1.2em;
+            }
+        }
     }
 }
 
@@ -101,9 +166,8 @@ export default {
     padding: 10px;
 }
 
-
 .icon{
-    color: gray;
     font-size: 70px;
+    color: gray
 }
 </style>

@@ -7,6 +7,8 @@ import MypageView from "@/views/MypageView"
 import ProductView from "@/views/ProductView"
 import LoginView from "@/views/LoginView"
 import HeatMap from "@/views/HeatMap"
+import ClientView from "@/views/ClientView"
+import ClientDetail from "@/components/client/ClientDetail"
 
 Vue.use(VueRouter)
 
@@ -45,6 +47,16 @@ const routes = [
     path: '/heatmap',
     name: 'heatmap',
     component: HeatMap
+  },
+  {
+    path: '/client',
+    name: 'client',
+    component: ClientView
+  },
+  {
+    path: '/client/:id',
+    name: 'clientDetail',
+    component: ClientDetail
   },
 
 ]

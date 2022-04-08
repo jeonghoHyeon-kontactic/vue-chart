@@ -14,8 +14,11 @@ export default {
 
     mutations: {
         login(state, payload){
+            console.log("commit진입")
+            console.log(payload.token)
             state.token = payload.token
             state.userName = payload.userName
+            console.log(state.token)
         },
         logout(state){
             state.token = "",
@@ -35,8 +38,8 @@ export default {
                 console.log(res)
 
                 commit('login',{
-                    token: res.data.accessToken,
-                    userName: res.data.userName
+                    token: res.data.content.accessToken,
+                    userName: res.data.content.userName
                 })
             })
             .catch(err => {

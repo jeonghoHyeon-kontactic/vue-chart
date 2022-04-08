@@ -139,8 +139,15 @@ export default {
             })
         },
         requestAnalysis(){
+            let asinsList = []
+            const reviewAsins = this.asins
+            asinsList = reviewAsins.split(/\n| /)
+            
+            console.log(reviewAsins)
+            console.log(asinsList)
+
             axios.post('/api/review-anals/insert',{
-                reviewAsins:this.asins,
+                reviewAsins:asinsList,
                 reviewAnalsTitle:this.title
             })
             .then(res => {

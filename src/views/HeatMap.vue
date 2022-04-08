@@ -1,15 +1,13 @@
 <template>
     <div>
         <heat-map-chart />
-        <tag-input />
     </div>
 </template>
 
 <script>
-import HeatMapChart from '@/components/chart/HeatMapChart.vue'
-import TagInput from '@/components/common/TagInput.vue'
+import HeatMapChart from '@/components/apexcharts/HeatMapChart.vue'
 export default {
-    components: { HeatMapChart, TagInput }    
+    components: { HeatMapChart }    
 }
 </script>
 
