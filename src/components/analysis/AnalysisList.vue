@@ -19,8 +19,8 @@
 </template>
 
 <script>
-import PageBar from '../PageBar.vue'
-import AnalysisItem from './AnalysisItem.vue' 
+import PageBar from '@/components/common/PageBar.vue'
+import AnalysisItem from '@/components/analysis/AnalysisItem.vue' 
 
 export default {
     components: { AnalysisItem, PageBar },

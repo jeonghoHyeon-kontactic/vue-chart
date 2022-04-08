@@ -31,6 +31,10 @@ export default {
                     name: "HeatMap",
                     href: "/heatmap"
                 },
+                {
+                    name: "TestView",
+                    href: "/test"
+                }
             ]
         }
     }

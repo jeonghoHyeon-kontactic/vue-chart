@@ -20,6 +20,7 @@ export default {
     },
 
     actions: {
+        // 고객사 리스트
         async searchClientList({commit},payload){
             try{
                 console.log(payload)
@@ -34,6 +35,7 @@ export default {
                 console.log(err)
             }
         },
+        // 고객사 상세페이지
         async searchClient({commit},payload){
             try{
                 console.log(payload)
@@ -47,7 +49,8 @@ export default {
             }catch (err) {
                 console.log(err)
             }
-        }
+        },
+        // 고객사 HeatMap
     }
 }
 

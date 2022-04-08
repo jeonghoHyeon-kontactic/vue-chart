@@ -9,6 +9,9 @@ import LoginView from "@/views/LoginView"
 import HeatMap from "@/views/HeatMap"
 import ClientView from "@/views/ClientView"
 import ClientDetail from "@/components/client/ClientDetail"
+import PaymentReport from "@/components/reports/PaymentReport"
+import TestView from "@/views/TestView"
+
 
 Vue.use(VueRouter)
 
@@ -58,6 +61,17 @@ const routes = [
     name: 'clientDetail',
     component: ClientDetail
   },
+  {
+    path: '/client/:id/heatmap',
+    name: 'paymentReport',
+    component: PaymentReport
+  },
+  {
+    path: '/test',
+    name: 'test',
+    component: TestView
+  }
+
 
 ]
 
