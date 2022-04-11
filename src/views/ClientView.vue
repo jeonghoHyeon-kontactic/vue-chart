@@ -2,7 +2,7 @@
     <v-container class="client-container">
         <app-title title="고객사 목록"/>
         <app-search />
-        <app-board :itemList="clientList" :length="length" :head="head"/>
+        <app-board :itemList="boardList" :length="length" :head="head"/>
     </v-container>
 </template>
 
@@ -14,28 +14,32 @@ export default {
     components: { AppTitle, AppSearch, AppBoard },
     data(){
         return {
-            head:["회사명","담당자","계약일","만료일","계약상태"]
+            head:["날짜","제목","ASIN","요청자","상태","상세화면"],
         }
     },
     methods: {
-        async resetData(){
-            await this.$store.dispatch("client/searchClientList",{
-                pageNum: 1,
-                searchText: ""
-            })
+        // searchAnalysis(pageNum){
+        //     this.$store.dispatch('analysis/searchAnalysisList',{
+        //         pageNum: pageNum == null ? 1: pageNum,
+        //         startDate: "2022-03-01",
+        //         endDate: "2022-04-10",
+        //         searchText: ""
+        //     })
+        // }
+    },
+    computed:{
+        length(){
+            return this.$store.state.analysis.navPages
+        },
+        boardList(){
+            return this.$store.state.analysis.boardList
         }
     },
     created(){
-        this.resetData()
+        // this.searchAnalysis()
+        console.log("view화면")
+        console.log(this.boardList)
     },
-    computed:{
-        clientList(){
-            return this.$store.state.client.clientList
-        },
-        length(){
-            return this.$store.state.client.navPages
-        },
-    }
 }
 </script>
 

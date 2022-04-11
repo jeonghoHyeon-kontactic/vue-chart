@@ -67,8 +67,8 @@ const routes = [
     component: PaymentReport
   },
   {
-    path: '/test',
-    name: 'test',
+    path: '/test3',
+    name: 'test3',
     component: TestView
   }
 

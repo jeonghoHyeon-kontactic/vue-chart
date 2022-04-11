@@ -2,7 +2,7 @@
     <v-container class="test-container">
         <app-title title="테스트 페이지" />
         <app-search />
-        <app-board :itemList="anlaysisList" :length="length" :head="head"/>
+        <app-board :itemList="boardList" :length="length" :head="head"/>
     </v-container>
 </template>
 
@@ -22,19 +22,22 @@ export default {
         searchAnalysis(pageNum){
             this.$store.dispatch('analysis/searchAnalysisList',{
                 pageNum: pageNum == null ? 1: pageNum,
-                startDate: this.startDate,
-                endDate: this.endDate,
-                searchText: this.searchText
+                startDate: "2022-03-01",
+                endDate: "2022-04-10",
+                searchText: ""
             })
         }
     },
     computed:{
-        anlaysisList(){
-            return this.$store.state.analysis.analysisList
-        },
         length(){
             return this.$store.state.analysis.navPages
         },
+        boardList(){
+            return this.$store.state.analysis.boardList
+        }
+    },
+    created(){
+        this.searchAnalysis()
     }
 }
 </script>

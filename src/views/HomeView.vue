@@ -3,7 +3,7 @@
     <v-row class="home-box">
       <v-col>
         Home
-        <v-btn @click="check">토근확인</v-btn>
+        <!-- <v-btn @click="check">토근확인</v-btn> -->
       </v-col>
     </v-row>
   </v-container>

@@ -114,7 +114,7 @@ export default {
         }
 
         .progress{
-            background: lightyellow;
+            background: orange;
             border-radius: 5px;
             color: white;
             padding: 3px 5px 3px 5px;

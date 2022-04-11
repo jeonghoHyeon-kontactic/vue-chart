@@ -20,7 +20,8 @@ export default {
         lowReviewList:[{}],
         highWordMixtureList:[],
         lowWordMixtureList:[],
-        reviewAsinsList:[]
+        reviewAsinsList:[],
+        boardList:[],
 
     }),
 
@@ -72,6 +73,29 @@ export default {
                 state.startDate = payload.startDate
                 state.endDate = payload.endDate
                 const analysisList = res.data.content.list
+                
+                
+                
+                // for (let i = 0; i < 10; i ++){
+                //     let list = []
+                    
+                //     list.push(analysisList[i].regDtm)
+                //     list.push(analysisList[i].reviewAnalsTitle)
+                //     list.push(analysisList[i].reviewAsins)
+                //     list.push(analysisList[i].regId)
+                //     list.push(analysisList[i].reviewAnalsId)
+                //     list.push(analysisList[i].analsStatus)
+                    
+                //     state.boardList.push(list) 
+                // }
+                
+
+                console.log(state.boardList)
+
+                
+
+                
+
                 const navPages = res.data.content.navigatepageNums.length
                 console.log(res)
                 console.log(analysisList)
@@ -79,6 +103,7 @@ export default {
                 commit('updateState',{
                     analysisList,
                     navPages,
+                    boardList:[]
                 })
 
             } catch (error) {

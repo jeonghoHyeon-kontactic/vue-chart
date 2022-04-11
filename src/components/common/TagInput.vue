@@ -21,7 +21,7 @@
             </div>
             <div class="btn-box">
                 <v-btn class="remove-btn" @click="remove" >삭제</v-btn>
-                <v-btn class="ignore-btn" @click="updateAnalysis">불용어 추가</v-btn>
+                <v-btn class="ignore-btn" @click="updateAnalysis">업데이트</v-btn>
             </div>
         </div>
     </div>
@@ -112,6 +112,8 @@ export default {
                 }
                 
             })
+
+            this.updateAnalysis()
         },
         highAddTag(){
             if (this.highTag == ""){

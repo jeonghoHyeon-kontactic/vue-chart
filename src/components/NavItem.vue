@@ -1,11 +1,11 @@
 <template>
     <div>
         <div class="nav-item-box" v-for="i in nav" :key="i.name">
-            <router-link class="nav-item-link" :to="i.href">
+            <div class="nav-item-link" @click="test(1,i.href)">
                 <div class="nav-item">
                     {{ i.name }}
                 </div>
-            </router-link> 
+            </div> 
         </div>
     </div>
 </template>
@@ -33,9 +33,25 @@ export default {
                 },
                 {
                     name: "TestView",
-                    href: "/test"
+                    href: "/test3"
                 }
             ]
+        }
+    },
+    methods:{
+        async test(pageNum,href){
+
+            if (href == "/client"){
+
+                await this.$store.dispatch('analysis/searchAnalysisList',{
+                    pageNum: pageNum == null ? 1: pageNum,
+                    startDate: "2022-03-01",
+                    endDate: "2022-04-10",
+                    searchText: ""
+                })
+            }
+
+            this.$router.push(href)
         }
     }
 }

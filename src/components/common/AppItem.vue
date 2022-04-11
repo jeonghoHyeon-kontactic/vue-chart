@@ -1,11 +1,12 @@
 <template>
     <div class="item-box">
-        <div class="item" v-for="i in item1" :key="i" :class="{'width': i == ''} ">
+        <div class="item" v-for="i in item" :key="i" :class="{'width': i == ''} ">
             {{ i }}
         </div>
         <div class="detail">
             <v-btn
                 elevation="2"
+                :disabled="item[item.length - 1] != 3"
                 @click="detail('client')"
             >상세 보기</v-btn>
         </div>
@@ -16,38 +17,33 @@
 export default {
     props:{
         item:{
-            type: Object,
-            default: () => ({})
-        },
-        item1:{
             type: Array,
             default: () => ([])
-        }
+        },
+    },
+    created(){
+        
     },
     methods:{
         async detail(item){
             try{
-
+                let apiURL = ""
+                let url = ""
                 if(item == "review"){
-
-                    // 리뷰 분석 상세페이지 정보 가져오기
-                    await this.$store.dispatch("analysis/searchAnalysisWithId",{
-                        reviewAnalsId: this.item.reviewAnalsId
-                    })
-                    
-                    // 리뷰 분석 상세페이지 이동
-                    this.$router.push(`/analysis/${this.item.reviewAnalsId}`)
-
+                    apiURL = "analysis/searchAnalysisWithId"
+                    url = "/analysis/1}"
                 } else if (item == "client") {
-
-                    // 고객사 상세피이지 정보 가져오기
-                    await this.$store.dispatch("client/searchClient",{
-                        reviewAnalsId: this.item.reviewAnalsId
-                    })
-                    
-                    // 고객사 상세페이지로 이동
-                    this.$router.push(`/client/${this.item.clntCmpnyId}`)
+                    apiURL = "client/searchClient"
+                    url = "/client/1"
                 }
+
+                // 상세피이지 정보 가져오기
+                await this.$store.dispatch(apiURL,{
+                    reviewAnalsId: 1
+                })
+                
+                // 상세페이지로 이동
+                this.$router.push(url)
 
             }catch (error) {
                 console.log(error)                

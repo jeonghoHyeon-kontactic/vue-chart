@@ -8,7 +8,7 @@
                 <div class="head-item" v-for="item in head" :key="item"> {{ item }}</div>
             </div>
             <div class="list-content">
-                <app-item v-for="item in itemList" :key="item" :item1="item1"/>
+                <app-item v-for="item in itemList" :key="item[4]" :item="item"/>
             </div>
             <page-bar :length="length" />
         </div>
@@ -20,16 +20,10 @@ import PageBar from '@/components/common/PageBar.vue'
 import AppItem from '@/components/common/AppItem.vue'
 
 export default {
-    data(){
-        return {
-            item1:[
-                "2022-04-07 10:33:48",
-                "string",
-                "B01FXMCWYG B01FXMCWYG ...",
-                "",
-                "대기",
-            ]
-        }
+    created(){
+        console.log("board화면")
+        console.log(this.itemList)
+        
     },
     props:{
         itemList:{
@@ -46,6 +40,16 @@ export default {
         },
     },
     components: { PageBar, AppItem },
+    methods:{
+        // searchAnalysis(pageNum){
+        //     this.$store.dispatch('analysis/searchAnalysisList',{
+        //         pageNum: pageNum == null ? 1: pageNum,
+        //         startDate: "2022-03-01",
+        //         endDate: "2022-04-10",
+        //         searchText: ""
+        //     })
+        // }
+    }
 }
 </script>
 
