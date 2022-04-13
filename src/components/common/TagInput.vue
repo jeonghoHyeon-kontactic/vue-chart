@@ -144,7 +144,7 @@ export default {
                 reviewAnalsId:this.$route.params.id
             })
             alert("업데이트 성공!")
-            this.$router.go()
+            // this.$router.go()
         },
     },
     computed:{
@@ -206,11 +206,12 @@ export default {
 
 .high-ignore{
     background: skyblue;
-    
+    height: 55px;
 }
 
 .low-ignore{
     background: pink;
+    height: 55px;
 }
 
 .red{

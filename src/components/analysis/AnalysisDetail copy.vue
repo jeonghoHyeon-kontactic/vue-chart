@@ -8,10 +8,13 @@
         </div>
         <div class="chart-box">
             <div class="high-chart-box">
-                <column-chart :cateList="highItem.highLabel" :dataList="highItem.highData" color="#87ceeb"/>
+                <bar-chart-test chart-id="high-chart" :labels="highItem.highLabel" :data="highItem.highData" color="skyblue" label="High Score Keyword"/>
             </div>
-            <div class="low-chart-box">
-                <column-chart :cateList="lowItem.lowLabel" :dataList="lowItem.lowData" color="#ffc0cb"/>
+            <div class="low-chart-box" v-if="true">
+                <bar-chart-test chart-id="low-chart" :labels="lowItem.lowLabel" :data="lowItem.lowData" color="pink" label="Low Score Keyword"/>
+                <div class="download-btn-box">
+                    <v-btn @click="saveImage">이미지 다운로드</v-btn>
+                </div>
             </div>
         </div>
         <div class="mixture-box">
@@ -29,7 +32,7 @@
 </template>
 
 <script>
-import ColumnChart from '../apexcharts/ColumnChart.vue'
+import BarChartTest from '../chart/BarChartTest.vue'
 import TagInput from '../common/TagInput.vue'
 import DataTableTest from '../DataTableTest.vue'
 import AnalysisInfo from './AnalysisInfo.vue'
@@ -37,7 +40,12 @@ import MixtureKwrd from './MixtureKwrd.vue'
 
 
 export default {
-    components: { AnalysisInfo, DataTableTest, TagInput, MixtureKwrd, ColumnChart}, 
+    components: { BarChartTest, AnalysisInfo, DataTableTest, TagInput, MixtureKwrd, }, 
+    data () {
+        return {
+            
+        }
+    },
     methods:{
         saveImage(){
             
@@ -115,7 +123,7 @@ export default {
             background: white;
             border-radius: 5px;
             margin-bottom: 10px;
-            padding: 10px 10px 0 10px;
+            padding: 10px;
         }
 
         .low-chart-box{
@@ -124,7 +132,7 @@ export default {
             background: white;
             border-radius: 5px;
             margin-bottom: 10px;
-            padding: 10px 10px 0 10px;
+            padding: 10px;
         }
     }
 

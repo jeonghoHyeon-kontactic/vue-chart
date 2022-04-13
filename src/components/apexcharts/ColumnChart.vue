@@ -1,6 +1,6 @@
 <template>
     <div id="chart">
-        <apexchart type="bar" height="350" :options="chartOptions" :series="series1"></apexchart>
+        <apexchart ref="columnChart" type="bar" height="350" :options="chartOptions" :series="series"></apexchart>
     </div>
 </template>
 
@@ -11,28 +11,56 @@ export default {
         apexchart: VueApexCharts,
   },
   props:{
-    series1:{
+    dataList:{
       type: Array,
-      default: () => ([30,40,45,50,49,60,70,91])
+      default: () => ([])
+    },
+    cateList:{
+      type: Array,
+      default: () => ([])
+    },
+    color:{
+      type: String,
+      default: () => ("")
     }
   },
   data(){
     return {
       chartOptions:{
         chart: { id: "basic-bar"},
-        xaxis: { categories: [1991,1992,1994,1995,1996,1997,1998,2000]}
+        xaxis: { categories: [1991,1992,1994,1995,1996,1997,1998,2000,1991,1992,1994,1995,1996,1997,1998,2000,1991,1992,1994,1995,1996,1997,1998,2000,1994,1995,1996,1997,1998,2000]},
+  
       },
       series: [
         {
-          name: "series-1",
-          data: [30,40,45,50,49,60,70,91]
+          name: 'series-1',
+          data: [30,40,45,50,49,60,70,91,30,40,45,50,49,60,70,91,30,40,45,50,49,60,70,91,45,50,49,60,70,91]
         }
       ]
+    }
+  },
+  created(){
+    this.updateChart()
+  },
+  methods:{
+    updateChart(){
+
+      this.chartOptions = {
+        xaxis:{
+          categories: this.cateList
+        },
+        colors: [this.color]
+      }
+
+      this.series = [{
+        data: this.dataList
+      }]
+    }
+  },
+  watch:{
+    dataList: function () {
+      this.updateChart()
     }
   }
 }
 </script>
-
-<style lang="scss" scoped>
-
-</style>
