@@ -27,6 +27,10 @@ export default {
                     name: "HeatMap",
                     href: "/heatmap"
                 },
+                {
+                    name: "TestPage",
+                    href: "/demo"
+                },
             ]
         }
     },

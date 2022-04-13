@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import HeatMapChart from '@/components/apexcharts/HeatMapChart.vue'
+import HeatMapChart from '@/components/apexcharts/HeatmapChart.vue'
 import TitleBox from '@/components/common/AppTitle.vue'
 export default {
     components: { HeatMapChart,TitleBox }    

@@ -119,7 +119,7 @@
 </template>
 
 <script>
-import HeatMapChart from '@/components/apexcharts/HeatMapChart.vue'
+import HeatMapChart from '@/components/apexcharts/HeatmapChart.vue'
 import AppTitle from '@/components/common/AppTitle.vue'
 import axios from 'axios'
 export default {
