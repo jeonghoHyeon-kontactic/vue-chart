@@ -8,10 +8,10 @@
             </div>
             <div class="review-box">
                 <div class="review-head">
-                    전체 리뷰
+                    전체 평가
                 </div>
                 <div class="review-content">
-                    {{ reviewCount }}개
+                    {{ totalRatings }}개
                 </div>
             </div>
         </div>
@@ -23,10 +23,10 @@
             </div>
             <div class="high-box">
                 <div class="high-head">
-                    5점 리뷰
+                    5점 평가
                 </div>
                 <div class="high-content">
-                    {{ highReview }}개
+                    {{ highRatings }}개
                 </div>
             </div>
         </div>
@@ -38,10 +38,10 @@
             </div>
             <div class="low-box">
                 <div class="low-head">
-                    1점 리뷰
+                    1점 평가
                 </div>
                 <div class="low-content">
-                    {{ lowReview }}개
+                    {{ lowRatings }}개
                 </div>
             </div>
         </div>
@@ -53,7 +53,7 @@
             </div>
             <div class="product-box">
                 <div class="product-head">
-                    상품 수
+                    분석한 ASIN 수
                 </div>
                 <div class="product-content">
                     {{ productCount }}개
@@ -66,6 +66,15 @@
 <script>
 export default {
     computed:{
+        highRatings(){
+            return this.$store.state.analysis.highReviewCnt
+        },
+        lowRatings(){
+            return this.$store.state.analysis.lowReviewCnt
+        },
+        totalRatings(){
+            return this.$store.state.analysis.reviewTotCnt
+        },
         highReview(){
             return this.$store.state.analysis.highReviewList.length
         },

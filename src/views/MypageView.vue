@@ -1,7 +1,7 @@
 <template>
     <div class="mypage-container">
         <div class="mypage-box">
-            <v-row class="mypage-title">
+            <!-- <v-row class="mypage-title">
                 비밀번호 변경
             </v-row>
             <v-row>
@@ -11,8 +11,8 @@
                 label="이메일을 입력해주세요."
                 required
                 ></v-text-field>
-            </v-row>
-            <v-row justify="center">
+            </v-row> -->
+             <v-row justify="center">
                 <v-dialog
                 v-model="dialog"
                 persistent
@@ -159,11 +159,7 @@ export default {
     justify-content: center;
     align-items: center;
     .mypage-box{
-        width: 30%;
-        background: lightgray;
-        border: 2px solid gray;
-        border-radius: 50px;
-        padding: 40px;
+    
         .mypage-title{
             justify-content: center;
             font-size: 3em;

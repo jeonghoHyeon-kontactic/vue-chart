@@ -22,6 +22,10 @@ export default {
         lowWordMixtureList:[],
         reviewAsinsList:[],
         boardList:[],
+        highReviewCnt:"",
+        lowReviewCnt:"",
+        reviewTotCnt:"",
+
 
     }),
 
@@ -103,7 +107,6 @@ export default {
                 commit('updateState',{
                     analysisList,
                     navPages,
-                    boardList:[]
                 })
 
             } catch (error) {
@@ -152,11 +155,18 @@ export default {
                 const highWordMixtureList = res.data.content.highWordMixtureList
                 const lowWordMixtureList = res.data.content.lowWordMixtureList
                 const reviewAsinsList = res.data.content.reviewAsinsList
+                const highReviewCnt = res.data.content.highReviewCnt
+                const lowReviewCnt = res.data.content.lowReviewCnt
+                const reviewTotCnt = res.data.content.reviewTotCnt
+
                 console.log(res)
                 console.log(analysis)
 
 
                 commit('updateState',{
+                    highReviewCnt,
+                    lowReviewCnt,
+                    reviewTotCnt,
                     reviewAsinsList,
                     highWordMixtureList,
                     lowWordMixtureList,

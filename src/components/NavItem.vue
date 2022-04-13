@@ -16,10 +16,6 @@ export default {
         return{
             nav: [
                 {
-                    name: "Client",
-                    href: "/client"
-                },
-                {
                     name: "Review",
                     href: "/analysis"
                 },
@@ -31,10 +27,6 @@ export default {
                     name: "HeatMap",
                     href: "/heatmap"
                 },
-                {
-                    name: "TestView",
-                    href: "/test3"
-                }
             ]
         }
     },
