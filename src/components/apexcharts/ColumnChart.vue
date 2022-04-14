@@ -1,6 +1,22 @@
 <template>
     <div id="chart">
-        <apexchart ref="columnChart" type="bar" height="350" :options="chartOptions" :series="series"></apexchart>
+        <div class="input-box">
+          <div class="switch-box">
+            <v-switch
+              v-model="switch1"
+              label="빈도수 정렬"
+            ></v-switch>
+          </div>
+          <v-radio-group v-model="radioGroup" row>
+            <v-radio
+              v-for="n in radio"
+              :key="n"
+              :label="`${n}개`"
+              :value="n"
+            ></v-radio>
+          </v-radio-group>
+        </div>
+        <apexchart type="bar" height="350" :options="chartOptions" :series="series"></apexchart>
     </div>
 </template>
 
@@ -11,12 +27,8 @@ export default {
         apexchart: VueApexCharts,
   },
   props:{
-    dataList:{
-      type: Array,
-      default: () => ([])
-    },
-    cateList:{
-      type: Array,
+    item:{
+      type: Array, 
       default: () => ([])
     },
     color:{
@@ -28,22 +40,38 @@ export default {
     return {
       chartOptions:{
         chart: { id: "basic-bar"},
-        xaxis: { categories: [1991,1992,1994,1995,1996,1997,1998,2000,1991,1992,1994,1995,1996,1997,1998,2000,1991,1992,1994,1995,1996,1997,1998,2000,1994,1995,1996,1997,1998,2000]},
+        xaxis: { categories: []},
   
       },
       series: [
         {
-          name: 'series-1',
-          data: [30,40,45,50,49,60,70,91,30,40,45,50,49,60,70,91,30,40,45,50,49,60,70,91,45,50,49,60,70,91]
+          name: '빈도수',
+          data: []
         }
-      ]
+      ],
+      radioGroup: 30,
+      radio:[10,20,30],
+      switch1: false,
+      sortList:[],
+      cateList:[],
+      dataList:[],
+      update:false
     }
   },
   created(){
-    this.updateChart()
+    this.updateChart(this.switch1, this.radioGroup)
   },
   methods:{
-    updateChart(){
+    updateChart(switch1, radio){
+      
+      this.sortList = this.sortChart(switch1, radio)
+      console.log(this.sortList) 
+      this.cateList = []
+      this.dataList = []
+      this.sortList.forEach(item => {
+        this.cateList.push(item.cate),
+        this.dataList.push(item.data)
+      })
 
       this.chartOptions = {
         xaxis:{
@@ -55,12 +83,60 @@ export default {
       this.series = [{
         data: this.dataList
       }]
+
+      console.log(this.test)
+    },
+    sortChart(switch1, radio){
+      
+      let itemList = this.item
+      let sortList = []
+
+      sortList = itemList.sort(function(a, b) {
+        return b.data - a.data
+      })
+
+
+      let testList = sortList.slice(0,radio)
+
+      if (switch1 == false){
+        sortList = testList.sort(function(a, b) {
+          let x = a.cate.toLowerCase()
+          let y = b.cate.toLowerCase()
+          if (x < y) {
+            return -1
+          }
+          if (x > y) {
+            return 1;
+          }
+          return 0
+        })
+      } else if (switch1 == true) {
+        sortList = testList.sort(function(a, b) {
+          return b.data - a.data
+        })
+      }
+      return sortList
     }
   },
   watch:{
-    dataList: function () {
-      this.updateChart()
-    }
+    switch1: function (val) {
+      this.updateChart(val, this.radioGroup)
+    },
+    radioGroup: function (val) {
+      this.updateChart(this.switch1, val)
+    },
+    // update: function () {
+    //   alert("안녕")
+    //   this.updateChart(this.switch1, this.radioGroup)
+    // }
   }
 }
 </script>
+
+
+<style lang="scss" scoped>
+.input-box{
+  display: flex;
+  justify-content: space-between;
+}
+</style>

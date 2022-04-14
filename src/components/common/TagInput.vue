@@ -207,11 +207,13 @@ export default {
 .high-ignore{
     background: skyblue;
     height: 55px;
+    overflow: auto;
 }
 
 .low-ignore{
     background: pink;
     height: 55px;
+    overflow: auto;
 }
 
 .red{

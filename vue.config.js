@@ -14,10 +14,6 @@ module.exports = {
         target: 'http://localhost:8081',
         changeOrigin: true // cross origin 허용
       },
-      '/test': {
-        target: 'http://172.30.1.15:5000',
-        changeOrigin: true
-      }
     }
-  }
+  },
 };

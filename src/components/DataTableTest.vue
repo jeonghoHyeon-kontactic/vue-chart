@@ -2,7 +2,7 @@
   <v-data-table
     :headers="dessertHeaders"
     :items="desserts"
-    :single-expand="singleExpand"
+    :single-expand="true"
     :expanded.sync="expanded"
     :search="search"
     item-class="review-item"
@@ -12,21 +12,15 @@
   >
     <template v-slot:top>
       <v-toolbar flat>
-        <v-toolbar-title>{{ title }}</v-toolbar-title>
+        <v-toolbar-title>{{ title }}</v-toolbar-title>        
         <v-spacer></v-spacer>
         <v-text-field
-            v-model="search"
-            append-icon="mdi-magnify"
-            label="Search"
-            single-line
-            hide-details
-        ></v-text-field>
-        <v-spacer></v-spacer>
-        <v-switch
-          v-model="singleExpand"
-          label="Single expand"
-          class="mt-2"
-        ></v-switch>
+        v-model="search"
+        append-icon="mdi-magnify"
+        label="Search"
+        single-line
+        hide-details
+      ></v-text-field>
       </v-toolbar>
     </template>
     <template v-slot:expanded-item="{ headers, item }">
@@ -64,6 +58,10 @@
 .review-item{
   height: 30px;
   overflow: hidden;
+}
+
+.test{
+  height: 100px !important;
 }
 
 .text-start{

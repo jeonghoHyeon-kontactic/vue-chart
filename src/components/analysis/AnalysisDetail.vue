@@ -8,10 +8,10 @@
         </div>
         <div class="chart-box">
             <div class="high-chart-box">
-                <column-chart :cateList="highItem.highLabel" :dataList="highItem.highData" color="#87ceeb"/>
+                <column-chart :item="highItem" color="#87ceeb"/>
             </div>
             <div class="low-chart-box">
-                <column-chart :cateList="lowItem.lowLabel" :dataList="lowItem.lowData" color="#ffc0cb"/>
+                <column-chart :item="lowItem"  color="#ffc0cb"/>
             </div>
         </div>
         <div class="mixture-box">
@@ -37,24 +37,7 @@ import MixtureKwrd from './MixtureKwrd.vue'
 
 
 export default {
-    components: { AnalysisInfo, DataTableTest, TagInput, MixtureKwrd, ColumnChart}, 
-    methods:{
-        saveImage(){
-            
-            let canvas1 = document.getElementById('high-chart').toDataURL('image/png')
-            let link1 = document.createElement('a')
-            link1.download = 'high-chart'
-            link1.href = canvas1
-            link1.click()
-
-            let canvas2 = document.getElementById('low-chart').toDataURL('image/png')
-            let link2 = document.createElement('a')
-            link2.download = 'low-chart'
-            link2.href = canvas2
-            link2.click()
-
-        },
-    },
+    components: { AnalysisInfo, DataTableTest, TagInput, MixtureKwrd, ColumnChart},
     computed:{
         highItem(){
             return this.$store.state.analysis.highItem

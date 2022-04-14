@@ -8,8 +8,8 @@ export default {
         analysisList:[],
         analysis:{},
         navPages:1,
-        highItem:{},
-        lowItem:{},
+        highItem:[],
+        lowItem:[],
         searchText:"",
         startDate:(new Date(Date.now() - (new Date()).getTimezoneOffset() * -1400000)).toISOString().substring(0, 10),
         endDate:(new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substring(0, 10),
@@ -25,8 +25,7 @@ export default {
         highReviewCnt:"",
         lowReviewCnt:"",
         reviewTotCnt:"",
-
-
+        update:false
     }),
 
     getters: {
@@ -78,27 +77,6 @@ export default {
                 state.endDate = payload.endDate
                 const analysisList = res.data.content.list
                 
-                
-                
-                // for (let i = 0; i < 10; i ++){
-                //     let list = []
-                    
-                //     list.push(analysisList[i].regDtm)
-                //     list.push(analysisList[i].reviewAnalsTitle)
-                //     list.push(analysisList[i].reviewAsins)
-                //     list.push(analysisList[i].regId)
-                //     list.push(analysisList[i].reviewAnalsId)
-                //     list.push(analysisList[i].analsStatus)
-                    
-                //     state.boardList.push(list) 
-                // }
-                
-
-                console.log(state.boardList)
-
-                
-
-                
 
                 const navPages = res.data.content.navigatepageNums.length
                 console.log(res)
@@ -142,12 +120,10 @@ export default {
 
 
                 const analysis = res.data.content
-                const highTokenCnt = JSON.parse(res.data.content.highTokenCnt)
-                const lowTokenCnt = JSON.parse(res.data.content.lowTokenCnt)
-                const highLabel = Object.keys(highTokenCnt)
-                const highData = Object.values(highTokenCnt)
-                const lowLabel = Object.keys(lowTokenCnt)
-                const lowData = Object.values(lowTokenCnt)
+
+                const highItem = res.data.content.highTokenCntList
+                const lowItem = res.data.content.lowTokenCntList
+
                 const highIgnoreKwd = res.data.content.highIgnoreKwrdList
                 const lowIgnoreKwd = res.data.content.lowIgnoreKwrdList
                 const highReviewList = res.data.content.highReviewList
@@ -173,18 +149,13 @@ export default {
                     highReviewList,
                     lowReviewList,
                     analysis,
-                    highItem:{
-                        highLabel,
-                        highData,
-                    },
-                    lowItem:{
-                        lowLabel,
-                        lowData
-                    },
+                    highItem,
+                    lowItem,
                     highIgnoreKwd,
-                    lowIgnoreKwd
+                    lowIgnoreKwd,
                 })
-
+                
+                // state.update == false ? true : false
                 
 
             }catch (error){
@@ -215,12 +186,9 @@ export default {
                     })
     
                     const analysis = res.data.content
-                    const highTokenCnt = JSON.parse(res.data.content.highTokenCnt)
-                    const lowTokenCnt = JSON.parse(res.data.content.lowTokenCnt)
-                    const highLabel = Object.keys(highTokenCnt)
-                    const highData = Object.values(highTokenCnt)
-                    const lowLabel = Object.keys(lowTokenCnt)
-                    const lowData = Object.values(lowTokenCnt)
+                    const highItem = res.data.content.highTokenCntList
+                    const lowItem = res.data.content.lowTokenCntList
+
                     const highIgnoreKwd = res.data.content.highIgnoreKwrdList
                     const lowIgnoreKwd = res.data.content.lowIgnoreKwrdList
                     const highReviewList = res.data.content.highReviewList
@@ -228,6 +196,8 @@ export default {
                     const highWordMixtureList = res.data.content.highWordMixtureList
                     const lowWordMixtureList = res.data.content.lowWordMixtureList
                     const reviewAsinsList = res.data.content.reviewAsinsList
+
+
                     
                     commit('updateState',{
                         reviewAsinsList,
@@ -236,19 +206,17 @@ export default {
                         highReviewList,
                         lowReviewList,
                         analysis,
-                        highItem:{
-                            highLabel,
-                            highData,
-                        },
-                        lowItem:{
-                            lowLabel,
-                            lowData
-                        },
+                        highItem,
+                        lowItem,
                         highIgnoreKwd,
                         lowIgnoreKwd
                     })
     
                     console.log(res)
+
+                    // state.update == false ? true : false
+
+                
                 }
 
             }catch (error){
